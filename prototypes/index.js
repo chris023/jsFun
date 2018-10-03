@@ -1,4 +1,5 @@
 const { instructors, cohorts } = require('./datasets/turing');
+const { constellations, stars } = require('./datasets/astronomy');
 const { cakes } = require('./datasets/cakes');
 const { pie } = require('./datasets/pie');
 const { clubs } = require('./datasets/clubs');
@@ -426,6 +427,109 @@ const bossPrompts = {
   }
 };
 
+// DATASET: kitties from ./datasets/kitties
+const kittyPrompts = {
+  orangeKittyNames() {
+    // Return an array of just the names of kitties who are orange e.g.
+    // ['Tiger', 'Snickers']
+
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
+  },
+
+  sortByAge() {
+    // Sort the kitties by their age
+
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
+  },
+
+  growUp() {
+    // Return an array of kitties who have all grown up by 2 years e.g.
+    // [{
+    //   name: 'Felicia',
+    //   age: 4,
+    //   color: 'grey'
+    // },
+    // {
+    //   name: 'Tiger',
+    //   age: 7,
+    //   color: 'orange'
+    // },
+    // ...etc]
+  }
+};
+
+// DATASET: bosses, sidekicks from ./datasets/bosses
+const astronomyPrompts = {
+  starsInConstellations() {
+    // Return an array of all the stars that appear in any of the constellations
+    // listed in the constellations object e.g.
+    // [ 
+    //   { name: 'Rigel',
+    //     visualMagnitude: 0.13,
+    //     constellation: 'Orion',
+    //     lightYearsFromEarth: 860,
+    //     color: 'blue' },
+    //   { name: 'Betelgeuse',
+    //     visualMagnitude: 0.5,
+    //     constellation: 'Orion',
+    //     lightYearsFromEarth: 640,
+    //     color: 'red' }
+    // ]
+
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
+  },
+
+  starsByColor() {
+    // Return an object with keys of the different colors of the stars,
+    // whose values are arrays containing the star objects that match e.g.
+    // {
+    //   blue: [{obj}, {obj}, {obj}, {obj}, {obj}],
+    //   white: [{obj}, {obj}],
+    //   yellow: [{obj}, {obj}],
+    //   orange: [{obj}],
+    //   red: [{obj}]
+    // }
+
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
+  },
+
+  constellationsStarsExistIn() {
+    // Return an array of the names of the constellations that the brightest stars are part of e.g.
+    // [ 'Canis Major',
+    //   'Carina',
+    //   'Boötes',
+    //   'Lyra',
+    //   'Auriga',
+    //   'Orion',
+    //   'Canis Minor',
+    //   'Eridanus',
+    //   'Orion',
+    //   'Centaurus' ]
+
+    const result = 'REPLACE WITH YOUR RESULT HERE';
+    return result;
+
+    // Annotation:
+    // Write your annotation here as a comment
+  }
+};
+
 module.exports = {
   cakePrompts,
   turingPrompts,
@@ -433,5 +537,7 @@ module.exports = {
   clubPrompts,
   bossPrompts,
   classPrompts,
-  modPrompts
+  modPrompts,
+  kittyPrompts,
+  astronomyPrompts
 };
