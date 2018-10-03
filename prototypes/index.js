@@ -6,35 +6,52 @@ const { classrooms } = require('./datasets/classrooms');
 const { mods } = require('./datasets/mods');
 const { bosses, sidekicks } = require('./datasets/bosses');
 
-// DATASET: instructors, cohorts from ./datasets/turing
+// --DONE-- DATASET: instructors, cohorts from ./datasets/turing
 const turingPrompts = {
   studentsForEachInstructor() {
     // Return an array of instructors where each instructor is an object
-    // with a name and the count of students in their module. e.g. 
-    // [
-    //  { name: 'Pam', studentCount: 21 },
-    //  { name: 'Robbie', studentCount: 18 }
-    // ]
+    // with a name and the count of students in their module.
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.map(instructor => {
+      return {
+        name: instructor.name,
+        studentCount: cohorts.find(cohort => {
+          return instructor.module === cohort.module;
+        }).studentCount
+      };
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given an array of instructors and array of mods, I want to return
+    // the name and count of students in their module.  Therefore I will use map
   },
 
   studentsPerInstructor() {
     // Return an object of how many students per teacher there are in each cohort e.g.
-    // { 
-    // cohort1806: 9,
-    // cohort1804: 10.5
-    // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.map(cohort => {
+
+      const myObj = {};
+
+      let numInstructors = instructors.filter(instructor =>
+        instructor.module == cohort.module).length;
+
+      myObj[`cohort${cohort.cohort}`] = cohort.studentCount / numInstructors;
+
+      return myObj;
+
+    }).reduce((acc, curr) => {
+      acc[Object.keys(curr)[0]] = curr[Object.keys(curr)[0]];
+      return acc;
+      }, {} );
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I want to use map since my ret will have as many objects as cohort.
+    // I also want to use filter to find the # of instructors in the mod
   },
 
   modulesPerTeacher() {
@@ -47,11 +64,38 @@ const turingPrompts = {
     //   Pam: [2, 4]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+
+
+    const result = instructors.reduce((acc, instructor) => {
+
+      const retArr = [];
+
+      cohorts.forEach(cohort => {
+        
+        let canTeach = false;
+
+        cohort.curriculum.forEach(skill => {
+          if (instructor.teaches.indexOf(skill) !== -1) {
+            canTeach = true;
+          }
+        });
+
+        if (canTeach) {
+          retArr.push(cohort.module);
+        }
+
+      });
+
+      acc[instructor.name] = retArr;
+      return acc;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Then I want to reduce the cohorts array based on skills that match up with 
+    // each cohorts curriculum
   },
 
   curriculumPerTeacher() {
@@ -64,30 +108,31 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((skills, cohort) => {
+      cohort.curriculum.forEach(skill => {
+        if (skills.indexOf(skill) === -1)
+          skills.push(skill);
+      });
+      return skills;
+    }, []).reduce((retObj, skill) => {
+      const hasSkills = [];
+      instructors.forEach(instructor => {
+        if (instructor.teaches.indexOf(skill) !== -1)
+          hasSkills.push(instructor.name);
+      })
+      retObj[skill] = hasSkills;
+      return retObj;
+    },{});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Need to reduce cohorts to an array of skills, then for each
+    // Need to filter instructors by their skills which match
   }
 };
 
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// DATASET: mods from ./datasets/mods
+// --DONE-- DATASET: mods from ./datasets/mods
 const modPrompts = {
   studentsPerMod() {
     // Return an array of objects where the keys are mod (the number of the module)
@@ -99,31 +144,24 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.reduce((arr, current) => {
+      const retObj = {};
+      retObj.mod = current.mod;
+      retObj.studentsPerInstructor = current.students / current.instructors;
+      arr.push(retObj);
+      return arr;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given an array of 4 objects, one for each mod, I want to return
+    // an array which shows students per instructor in each mod.  Therefore
+    // I want to use reduce to accumulate an array with 4 objects.
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// DATASET: classrooms from ./datasets/classrooms
+// --DONE-- DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
   feClassrooms() {
     // Create an array of just the front-end classrooms. e.g.
@@ -134,11 +172,15 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(classroom => {
+      return classroom.program === 'FE';
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I'm given an array of classrooms and want just the front-end
+    // classrooms, therefore I will use filter
   },
 
   totalCapacities() {
@@ -149,52 +191,59 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let feClassRooms = classrooms.filter(classroom => classroom.program === 'FE');
+    let beClassRooms = classrooms.filter(classroom => classroom.program === 'BE');
+
+    let feCap = feClassRooms.reduce((acc, curr) => acc + curr.capacity, 0);
+    let beCap = beClassRooms.reduce((acc, curr) => acc + curr.capacity, 0);
+
+
+    const result = { beCapacity: beCap, feCapacity: feCap };
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I'm given an array of classrooms, and I want to filter the array
+    // for each classroom type, then reduce the sum of the capacities for each.
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity > b.capacity);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // Given an array of classrooms, I want to sort them by capacity.
+    // Therefore I will use sort().
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// DATASET: cakes from ./datasets/cakes
+// --DONE-- DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
   allToppings() {
     // Return an array of all unique toppings (no duplicates) needed to bake
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let allToppings = [];
+
+    cakes.forEach(cake => {
+      cake.toppings.forEach(topping => allToppings.push(topping));
+    });
+
+    allToppings = allToppings.filter((topping, index) => {
+      return allToppings.indexOf(topping) === index;
+    });
+
+    const result = allToppings;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am receiving an array of cakes, and I want to extract all
+    // the toppings that are used in those cakes and then filter
+    // that list so that there are no duplicates.  Therefore, I 
+    // will use forEach to extract all of the toppings and then
+    // I will use filter to filter out the duplicates.
   },
 
   groceryList() {
@@ -208,11 +257,25 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let myResult = {};
+
+    cakes.forEach(cake => {
+      cake.toppings.forEach(topping => {
+        if (myResult[topping] === undefined)
+          myResult[topping] = 0;
+        myResult[topping] += 1;
+      });
+    });
+
+    const result = myResult;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am receiving an array of cakes, and I want to count the 
+    // amount of each ingredient I should buy at the store.  Therefore
+    // I will use forEach to iterate over each cake, then forEach again
+    // to iterate over the ingredient list and update my return object with
+    // the count of that item.
   },
 
   stockPerCake() {
@@ -224,64 +287,51 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => {
+      return {
+        cakeFlavor: cake.cakeFlavor,
+        inStock: cake.inStock
+      }
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am recieving an array of cakes, and I want to display an inventory
+    // based on the cakes flavor.  Therefore I will use map to return a 
+    // modified version of the cakes array.
   },
 
   totalInventory() {
     // Return the total amout of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, curr) => {
+      return acc + curr.inStock;
+    }, 0);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am recieving an array of cakes, and I want to return the total number
+    // of cakes in stock.  Therefore I will use reduce to accumulate the num
+    // of cakes in inventory.
   },
 
   onlyInStock() {
-    // Return an array of only the cakes that are in stock
-    // e.g.
-    // [
-    //   {
-    //   cakeFlavor: 'dark chocolate',
-    //   filling: null,
-    //   frosting: 'dark chocolate ganache',
-    //   toppings: ['dutch process cocoa', 'toasted sugar', 'smoked sea salt'],
-    //   inStock: 15
-    // },
-    // {
-    //   cakeFlavor: 'yellow',
-    //   filling: 'citrus glaze',
-    //   frosting: 'chantilly cream',
-    //   toppings: ['berries', 'edible flowers'],
-    //   inStock: 14
-    // },
-    // ..etc
-    // ]
+
+    let myReturn = cakes.filter(cake => cake.inStock > 0);
+    return myReturn;
+
+
+    // ANNOTATION: I'm recieving an array of cakes, and I want a 
+    // subset of that array, so I'm going to reach for filter.my 
+    // filter callback will return only the cakes who have an 
+    // inStock value.
   }
 };
 
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-
-// DATASET: pie from ./datasets/pie
+// --DONE-- DATASET: pie from ./datasets/pie
 const piePrompts = {
   howManyIngredients() {
     // The bakery needs to make more rhubarb pies in order to meet the
@@ -293,30 +343,24 @@ const piePrompts = {
     //   sugar: 100
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    let numToMake = pie.desiredInventoryCount - pie.inventoryCount;
+    let retObj = {}
+
+    Object.keys(pie.ingredients).forEach(ingredient => {
+      retObj[ingredient] = pie.ingredients[ingredient] * numToMake;
+    });
+    const result = retObj;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I have a pie Object and need to extract the desired inventory 
+    // and compare it to the current inventory, then multiply the necessary
+    // ingredients for one pie by the amount of more pies I want to make.
   }
 };
 
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// DATASET: clubs from ./datasets/clubs
+// --DONE-- DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
   membersBelongingToClubs() {
     // Create an object whose keys are the names of people, and whose values are
@@ -326,29 +370,28 @@ const clubPrompts = {
     //   Pam: ['Drama', 'Art', 'Chess'],
     //   ...etc
     // }
+    let myObj = {};
+    clubs.forEach(club => {
+      club.members.forEach(member => {
+        if (myObj[member] === undefined) {
+          myObj[member] = [club.club];
+        }
+        else {
+          myObj[member].push(club.club);
+        }
+      });
+    });
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = myObj;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am given an object of clubs, and need create an object that shows
+    // every club that an individual is in.  I will use forEach to iterate
+    // over each club, and append that club name to that persons array
+    // of clubs in my return Obj.
   }
 };
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
@@ -361,17 +404,30 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    retObj = {};
+
+    sidekicks.forEach(sidekick => {
+      if (retObj[sidekick.boss] === undefined)
+        retObj[sidekick.boss] = {
+          bossName: sidekick.boss,
+          sidekickLoyalty: sidekick.loyaltyToBoss
+        }
+      else {
+        retObj[sidekick.boss].sidekickLoyalty += sidekick.loyaltyToBoss;
+      }
+    })
+
+    const result = retObj;
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // I am given a group of bosses, and a list of sidekicks
   }
 };
 
-
-
 module.exports = {
+  cakePrompts,
   turingPrompts,
   piePrompts,
   clubPrompts,
