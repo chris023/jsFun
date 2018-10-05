@@ -1,0 +1,509 @@
+
+> jsFun@1.0.0 test /Users/chris/Turing/2 Mod.2/jsFun
+> ./node_modules/mocha/bin/mocha test/ --reporter dot --require mocha-clean
+
+
+
+  ․․,․!!․․․,․․!․!!․!․․․!!․!!!․․!․․!!․․!․․!!!!!!!․
+
+  23 passing (30ms)
+  2 pending
+  22 failing
+
+  1) CONTEXT
+       exerciseE:
+
+      AssertionError: expected 'gloabl window object' to equal 'global window object'
+      + expected - actual
+
+      -gloabl window object
+      +global window object
+      
+      at Context.it (test/context-test.js:27:23)
+
+  2) CONTEXT
+       exerciseF:
+
+      AssertionError: expected 'storm' to equal 'instance of Hero'
+      + expected - actual
+
+      -storm
+      +instance of Hero
+      
+      at Context.it (test/context-test.js:32:23)
+
+  3) PROTOTYPES
+       Turing Prompts
+         modulesPerTeacher:
+
+      AssertionError: expected { Object (Pam, Brittany, ...) } to deeply equal { Object (Pam, Brittany, ...) }
+      + expected - actual
+
+           3
+           4
+         ]
+         "Leta": [
+      +    4
+           2
+      -    4
+         ]
+         "Louisa": [
+           1
+           2
+      
+      at Context.it (test/prototype-test.js:35:30)
+
+  4) PROTOTYPES
+       Club Prompts
+         membersBelongingToClubs:
+     AssertionError: expected { Object (Louisa, Pam, ...) } to deeply equal undefined
+      at Context.it (test/prototype-test.js:48:30)
+
+  5) PROTOTYPES
+       Boss Prompts
+         bossLoyalty:
+
+      AssertionError: expected [ Array(3) ] to deeply equal [ Array(3) ]
+      + expected - actual
+
+       [
+         {
+      -    "bossName": "scar"
+      +    "bossName": "Scar"
+           "sidekickLoyalty": 16
+         }
+         {
+      -    "bossName": "ursula"
+      +    "bossName": "Ursula"
+           "sidekickLoyalty": 20
+         }
+         {
+      -    "bossName": "jafar"
+      +    "bossName": "Jafar"
+           "sidekickLoyalty": 3
+         }
+       ]
+      
+      at Context.it (test/prototype-test.js:56:30)
+
+  6) PROTOTYPES
+       Class Prompts
+         totalCapacities:
+
+      AssertionError: expected { beCapacity: 96, feCapacity: 110 } to deeply equal { FE: 110, BE: 96 }
+      + expected - actual
+
+       {
+      -  "beCapacity": 96
+      -  "feCapacity": 110
+      +  "BE": 96
+      +  "FE": 110
+       }
+      
+      at Context.it (test/prototype-test.js:69:30)
+
+  7) PROTOTYPES
+       Kitty Prompts
+         sortByAge:
+
+      AssertionError: expected [ Array(4) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      -    "age": 1
+      -    "color": "tuxedo"
+      -    "name": "Max"
+      +    "age": 8
+      +    "color": "orange"
+      +    "name": "Snickers"
+         }
+         {
+      +    "age": 5
+      +    "color": "orange"
+      +    "name": "Tiger"
+      +  }
+      +  {
+           "age": 2
+           "color": "grey"
+           "name": "Felicia"
+         }
+         {
+      -    "age": 5
+      -    "color": "orange"
+      -    "name": "Tiger"
+      +    "age": 1
+      +    "color": "tuxedo"
+      +    "name": "Max"
+         }
+      -  {
+      -    "age": 8
+      -    "color": "orange"
+      -    "name": "Snickers"
+      -  }
+       ]
+      
+      at Context.it (test/prototype-test.js:96:30)
+
+  8) PROTOTYPES
+       Kitty Prompts
+         growUp:
+
+      AssertionError: expected [ Array(2) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      -    "age": 5
+      +    "age": 4
+      +    "color": "grey"
+      +    "name": "Felicia"
+      +  }
+      +  {
+      +    "age": 7
+           "color": "orange"
+           "name": "Tiger"
+         }
+         {
+      -    "age": 8
+      +    "age": 10
+           "color": "orange"
+           "name": "Snickers"
+         }
+      +  {
+      +    "age": 3
+      +    "color": "tuxedo"
+      +    "name": "Max"
+      +  }
+       ]
+      
+      at Context.it (test/prototype-test.js:101:30)
+
+  9) PROTOTYPES
+       Astronomy Prompts
+         starsInConstellations:
+     AssertionError: expected 'REPLACE WITH YOUR RESULT HERE' to deeply equal [ Array(2) ]
+      at Context.it (test/prototype-test.js:117:30)
+
+  10) PROTOTYPES
+       Astronomy Prompts
+         starsByColor:
+     AssertionError: expected 'REPLACE WITH YOUR RESULT HERE' to deeply equal { Object (blue, white, ...) }
+      at Context.it (test/prototype-test.js:122:30)
+
+  11) PROTOTYPES
+       Astronomy Prompts
+         constellationsStarsExistIn:
+     AssertionError: expected 'REPLACE WITH YOUR RESULT HERE' to deeply equal [ Array(11) ]
+      at Context.it (test/prototype-test.js:127:30)
+
+  12) PROTOTYPES
+       Cake Prompts
+         stockPerCake:
+
+      AssertionError: expected [ Array(6) ] to deeply equal [ Array(6) ]
+      + expected - actual
+
+       [
+         {
+      -    "cakeFlavor": "dark chocolate"
+      +    "flavor": "dark chocolate"
+           "inStock": 15
+         }
+         {
+      -    "cakeFlavor": "yellow"
+      +    "flavor": "yellow"
+           "inStock": 14
+         }
+         {
+      -    "cakeFlavor": "white chiffon"
+      +    "flavor": "white chiffon"
+           "inStock": 0
+         }
+         {
+      -    "cakeFlavor": "butter rum"
+      +    "flavor": "butter rum"
+           "inStock": 9
+         }
+         {
+      -    "cakeFlavor": "vanilla"
+      +    "flavor": "vanilla"
+           "inStock": 21
+         }
+         {
+      -    "cakeFlavor": "honey"
+      +    "flavor": "honey"
+           "inStock": 0
+         }
+       ]
+      
+      at Context.it (test/prototype-test.js:145:30)
+
+  13) SCOPE
+       exerciseA:
+
+      AssertionError: expected [ Array(4) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+         {
+           "C": "CardiB"
+         }
+         {
+      -    "D": [undefined]
+      +    "D": "Paul"
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:7:28)
+
+  14) SCOPE
+       exerciseB:
+
+      AssertionError: expected [ Array(4) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      -    "A": "75"
+      +    "A": 75
+         }
+         {
+      -    "B": "64"
+      +    "B": 64
+         }
+         {
+      -    "C": "64"
+      +    "C": 64
+         }
+         {
+      -    "D": "30"
+      +    "D": 30
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:17:28)
+
+  15) SCOPE
+       exerciseE:
+
+      AssertionError: expected [ Array(4) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      +    "C": "Brittany"
+      +  }
+      +  {
+           "A": "Nathaniel"
+         }
+         {
+           "B": "Nathaniel"
+         }
+         {
+      -    "C": "Brittany"
+      -  }
+      -  {
+           "D": "Brittany"
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:47:28)
+
+  16) SCOPE
+       exerciseH:
+
+      AssertionError: expected [ Array(5) ] to deeply equal [ Array(5) ]
+      + expected - actual
+
+       [
+         {
+      -    "A": "4"
+      +    "A": 4
+         }
+         {
+      -    "B": "9"
+      +    "D": 9
+         }
+         {
+      -    "C": "4"
+      +    "E": 10
+         }
+         {
+      -    "D": "9"
+      +    "B": 9
+         }
+         {
+      -    "E": "10"
+      +    "C": 4
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:78:28)
+
+  17) SCOPE
+       exerciseI:
+
+      AssertionError: expected [ Array(5) ] to deeply equal [ Array(8) ]
+      + expected - actual
+
+       [
+         {
+      -    "A": "75"
+      +    "A": 75
+         }
+         {
+      -    "B": "0"
+      +    "B": 0
+         }
+         {
+      -    "C": "75"
+      +    "C": 75
+         }
+         {
+      -    "D": "80"
+      +    "D": 80
+         }
+         {
+      -    "E": "55"
+      +    "A": 55
+         }
+      +  {
+      +    "B": 0
+      +  }
+      +  {
+      +    "C": 55
+      +  }
+      +  {
+      +    "E": 55
+      +  }
+       ]
+      
+      at Context.it (test/scope-test.js:89:28)
+
+  18) SCOPE
+       exerciseJ:
+
+      AssertionError: expected [ Array(6) ] to deeply equal [ Array(6) ]
+      + expected - actual
+
+         {
+           "A": "ketchup sandwich"
+         }
+         {
+      -    "B": "undefined"
+      +    "D": "gouda"
+         }
+         {
+      -    "C": "not a mediocre sandwich"
+      +    "B": [undefined]
+         }
+         {
+      -    "D": "gouda"
+      +    "C": "not a mediocre sandwich"
+         }
+         {
+           "E": "not a mediocre sandwich"
+         }
+      
+      at Context.it (test/scope-test.js:103:28)
+
+  19) SCOPE
+       exerciseK:
+
+      AssertionError: expected [ { A: '7' }, { B: '7' } ] to deeply equal [ { A: 7 }, { B: 7 } ]
+      + expected - actual
+
+       [
+         {
+      -    "A": "7"
+      +    "A": 7
+         }
+         {
+      -    "B": "7"
+      +    "B": 7
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:115:28)
+
+  20) SCOPE
+       exerciseL:
+
+      AssertionError: expected [ Array(3) ] to deeply equal [ { A: 95 }, { B: 90 }, { C: 90 } ]
+      + expected - actual
+
+       [
+         {
+      -    "A": "95"
+      +    "A": 95
+         }
+         {
+      -    "B": "90"
+      +    "B": 90
+         }
+         {
+      -    "C": "90"
+      +    "C": 90
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:123:28)
+
+  21) SCOPE
+       exerciseM:
+
+      AssertionError: expected [ Array(4) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      -    "A": "5"
+      +    "A": 5
+         }
+         {
+      -    "B": "6"
+      +    "B": 6
+         }
+         {
+           "C": "reference error"
+         }
+         {
+      -    "D": "6"
+      +    "D": 6
+         }
+       ]
+      
+      at Context.it (test/scope-test.js:132:28)
+
+  22) SCOPE
+       exerciseN:
+
+      AssertionError: expected [ Array(6) ] to deeply equal [ Array(6) ]
+      + expected - actual
+
+       [
+         {
+      +    "E": "Pam"
+      +  }
+      +  {
+           "A": "Pam"
+         }
+         {
+           "B": "Pam"
+--
+         {
+           "D": "Louisa"
+         }
+         {
+      -    "E": "Pam"
+      +    "F": "Louisa"
+         }
+      -  {
+      -    "F": "Luoisa"
+      -  }
+       ]
+      
+      at Context.it (test/scope-test.js:142:28)
+
+
+
