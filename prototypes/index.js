@@ -6,9 +6,12 @@ const { clubs } = require('./datasets/clubs');
 const { classrooms } = require('./datasets/classrooms');
 const { mods } = require('./datasets/mods');
 const { bosses, sidekicks } = require('./datasets/bosses');
+const { kitties } = require('./datasets/kitties');
+const { astronomy } = require('./datasets/astronomy');
 
 // --DONE-- DATASET: instructors, cohorts from ./datasets/turing
 const turingPrompts = {
+  //8 lines 2 proto
   studentsForEachInstructor() {
     // Return an array of instructors where each instructor is an object
     // with a name and the count of students in their module.
@@ -29,6 +32,7 @@ const turingPrompts = {
     // the name and count of students in their module.  Therefore I will use map
   },
 
+  //10 lines 3 proto
   studentsPerInstructor() {
     // Return an object of how many students per teacher there are in each cohort e.g.
 
@@ -55,6 +59,7 @@ const turingPrompts = {
     // I also want to use filter to find the # of instructors in the mod
   },
 
+  //14 lines 3 proto
   modulesPerTeacher() {
     // Return an object where each key is an instructor name and each value is
     // an array of the modules they can teach based on their skills. e.g.:
@@ -69,25 +74,16 @@ const turingPrompts = {
 
 
     const result = instructors.reduce((acc, instructor) => {
-
       const retArr = [];
-
       cohorts.forEach(cohort => {
-        
         let canTeach = false;
-
         cohort.curriculum.forEach(skill => {
           if (instructor.teaches.indexOf(skill) !== -1) {
             canTeach = true;
           }
         });
-
-        if (canTeach) {
-          retArr.push(cohort.module);
-        }
-
+        if (canTeach) retArr.push(cohort.module);
       });
-
       acc[instructor.name] = retArr;
       return acc;
     }, {});
@@ -99,6 +95,7 @@ const turingPrompts = {
     // each cohorts curriculum
   },
 
+  //15 lines 4 proto
   curriculumPerTeacher() {
     // Return an object where each key is a curriculum topic and each value is
     // an array of instructors who teach that topic e.g.:
@@ -135,6 +132,7 @@ const turingPrompts = {
 
 // --DONE-- DATASET: mods from ./datasets/mods
 const modPrompts = {
+  //7 lines 1 proto
   studentsPerMod() {
     // Return an array of objects where the keys are mod (the number of the module)
     // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
@@ -164,6 +162,7 @@ const modPrompts = {
 
 // --DONE-- DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
+  //3 lines 1 proto
   feClassrooms() {
     // Create an array of just the front-end classrooms. e.g.
     // [
@@ -184,6 +183,7 @@ const classPrompts = {
     // classrooms, therefore I will use filter
   },
 
+  //5 lines 2 proto
   totalCapacities() {
     // Create an object where the keys are 'feCapacity' and 'beCapacity',
     // and the values are the total capacity for all classrooms in each program e.g.
@@ -207,6 +207,7 @@ const classPrompts = {
     // for each classroom type, then reduce the sum of the capacities for each.
   },
 
+  //1 line 1 proto
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
@@ -221,6 +222,7 @@ const classPrompts = {
 
 // --DONE-- DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
+  //8 lines 2 proto
   allToppings() {
     // Return an array of all unique toppings (no duplicates) needed to bake
     // every cake in the dataset e.g.
@@ -247,6 +249,7 @@ const cakePrompts = {
     // I will use filter to filter out the duplicates.
   },
 
+  //9 lines 2 proto
   groceryList() {
     // I need to make a grocery list. Please give me an object where the keys are
     // each topping, and the values are the amount of that topping I need to buy e.g.
@@ -279,6 +282,7 @@ const cakePrompts = {
     // the count of that item.
   },
 
+  // 6 lines 1 proto
   stockPerCake() {
     // Return an array of objects that include just the flavor of the cake and how
     // much of that cake is in stock e.g.
@@ -303,6 +307,7 @@ const cakePrompts = {
     // modified version of the cakes array.
   },
 
+  //3 lines 1 proto
   totalInventory() {
     // Return the total amout of cakes in stock e.g.
     // 59
@@ -319,6 +324,7 @@ const cakePrompts = {
     // of cakes in inventory.
   },
 
+  //1 line 1 proto
   onlyInStock() {
 
     let myReturn = cakes.filter(cake => cake.inStock > 0);
@@ -333,7 +339,9 @@ const cakePrompts = {
 };
 
 // --DONE-- DATASET: pie from ./datasets/pie
+
 const piePrompts = {
+  //6 lines 1 proto
   howManyIngredients() {
     // The bakery needs to make more rhubarb pies in order to meet the
     // desiredInventoryCount. Programmatically determine how many more pies
@@ -363,6 +371,7 @@ const piePrompts = {
 
 // --DONE-- DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
+  //12 lines 2 proto
   membersBelongingToClubs() {
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g. 
@@ -394,8 +403,9 @@ const clubPrompts = {
   }
 };
 
-// DATASET: bosses, sidekicks from ./datasets/bosses
+// --DONE-- DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
+  //12 lines 1 proto
   bossLoyalty() {
     // Create an array of objects that each have the name of the boss and the sum
     // loyalty of all their sidekicks. e.g.:
@@ -405,20 +415,31 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    retObj = {};
+    // retObj = {};
 
-    sidekicks.forEach(sidekick => {
-      if (retObj[sidekick.boss] === undefined)
-        retObj[sidekick.boss] = {
-          bossName: sidekick.boss,
-          sidekickLoyalty: sidekick.loyaltyToBoss
-        }
-      else {
-        retObj[sidekick.boss].sidekickLoyalty += sidekick.loyaltyToBoss;
-      }
-    })
+    // sidekicks.forEach(sidekick => {
+    //   if (retObj[sidekick.boss] === undefined)
+    //     retObj[sidekick.boss] = {
+    //       bossName: sidekick.boss,
+    //       sidekickLoyalty: sidekick.loyaltyToBoss
+    //     }
+    //   else {
+    //     retObj[sidekick.boss].sidekickLoyalty += sidekick.loyaltyToBoss;
+    //   }
+    // })
 
-    const result = retObj;
+    const result = Object.keys(bosses).map(bossName => {
+      retObj = {};
+      retObj.bossName = bossName;
+      retObj.sidekickLoyalty = 0;
+      sidekicks.forEach(sidekick => {
+        if (sidekick.boss.toLowerCase() === bossName.toLowerCase())
+          retObj.sidekickLoyalty += sidekick.loyaltyToBoss;
+      });
+      return retObj;
+    });
+
+    
 
     return result;
 
@@ -427,29 +448,32 @@ const bossPrompts = {
   }
 };
 
-// DATASET: kitties from ./datasets/kitties
+// --DONE-- DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
+  //1 line 1 proto
   orangeKittyNames() {
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.filter(kitty => kitty.color === 'orange').map(kitty => kitty.name);
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
   },
 
+  //1 line 1 proto
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.sort((a, b) => a.age > b.age);
     return result;
 
     // Annotation:
     // Write your annotation here as a comment
   },
 
+  //1 line 1 proto
   growUp() {
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
@@ -463,10 +487,14 @@ const kittyPrompts = {
     //   color: 'orange'
     // },
     // ...etc]
+
+    const result = kitties.filter(kitty => kitty.age > 2);
+    return result;
+
   }
 };
 
-// DATASET: bosses, sidekicks from ./datasets/bosses
+// DATASET: bosses, sidekicks from ./datasets/astronomy
 const astronomyPrompts = {
   starsInConstellations() {
     // Return an array of all the stars that appear in any of the constellations
@@ -538,6 +566,8 @@ module.exports = {
   bossPrompts,
   classPrompts,
   modPrompts,
+  kittyPrompts,
+  astronomyPrompts,
   kittyPrompts,
   astronomyPrompts
 };

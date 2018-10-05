@@ -16,7 +16,7 @@ const context = {
 
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'instance of ship';
+    const result = 'global window object';
     return result;
 
     // Annotation:
@@ -30,7 +30,7 @@ const context = {
     }
     
     // What is the value of `this` when we call fn()?
-    const result = 'exerciseB';
+    const result = 'global window object';
     return result;
 
     // Annotation:
@@ -60,7 +60,7 @@ const context = {
   exerciseD() {
     const dog = {
       breed: "Chihuahua",
-      getBreed: function(){
+      getBreed: function () {
         const innerFunction = function() {
         console.log(this.breed);
       };
@@ -71,7 +71,7 @@ const context = {
 
 
     // What is the value of `this` when we call dog.getBreed()?
-    const result = 'dog';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
@@ -87,7 +87,7 @@ const context = {
 
 
     // What is the value of `this` when we call fn()?
-    const result = 'window';
+    const result = 'gloabl window object';
     return result;
 
     // Annotation: 
@@ -110,7 +110,7 @@ const context = {
     const storm = new Hero('Ororo', 'weather control', true);
 
     // What is the value of `this` when we call storm.identifyHero()?
-    const result = 'instance of storm';
+    const result = 'storm';
     return result;
 
     // Annotation: 
@@ -138,7 +138,7 @@ const context = {
 
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'Function setTimeout';
+    const result = 'global window object';
     return result;
 
     // Annotation: 
@@ -156,7 +156,7 @@ const context = {
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'obj.method';
+    const result = 'obj';
     return result;
 
     // Annotation: 
@@ -179,10 +179,10 @@ const context = {
     }, poets)
 
     // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'instance of poets';
+    const result = 'poets';
     return result;
 
-    // Annotation: 
+    // Annotation: poets is explicitly defined using thisArg in map()
     // Write your annotation here as a comment. Annotation should include explanation regarding the second argument of `poets` that is being passed
   },
 
@@ -192,10 +192,11 @@ const context = {
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = `$('#btn')`;
+    const result = `#btn`;
     return result;
 
-    // Annotation: 
+    // Annotation: Since we are using es5 function declaration, it refers to the calling element.  Arrow functions would
+    // refer to the window object instead
     // Write your annotation here as a comment.
   }
 

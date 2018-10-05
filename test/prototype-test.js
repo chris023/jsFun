@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { turingPrompts, cakePrompts, bossPrompts, clubPrompts, classPrompts, modPrompts, piePrompts } = require('../prototypes/index');
+const { turingPrompts, cakePrompts, bossPrompts, clubPrompts, classPrompts, modPrompts, piePrompts, astronomyPrompts, kittyPrompts } = require('../prototypes/index');
 
 describe('PROTOTYPES', () => {
   describe('Turing Prompts', () => {
@@ -248,5 +248,56 @@ describe('PROTOTYPES', () => {
       );
     });
   });
+
+  describe('Kitty Prompts', () => {
+    it('orangeKittyNames', () => {
+      const result = kittyPrompts.orangeKittyNames();
+      expect(result).to.deep.equal(
+        [
+          { name: 'Tiger', age: 5, color: 'orange' },
+          { name: 'Snickers', age: 8, color: 'orange' }
+        ]
+      );
+    });
+
+    it('sortByAge', () => {
+      const result = kittyPrompts.sortByAge();
+      expect(result).to.deep.equal(
+        [
+          { name: 'Max', age: 1, color: 'tuxedo' },
+          { name: 'Felicia', age: 2, color: 'grey' },
+          { name: 'Tiger', age: 5, color: 'orange' },
+          { name: 'Snickers', age: 8, color: 'orange' }
+        ]
+      );
+    });
+
+    it('growUp', () => {
+      const result = kittyPrompts.growUp();
+      expect(result).to.deep.equal(
+        [
+          { name: 'Tiger', age: 5, color: 'orange' },
+          { name: 'Snickers', age: 8, color: 'orange' }
+        ]
+      );
+    });
+  });
+
+  // describe('Astronomy Prompts', () => {
+  //   it('starsInConstellations', () => {
+  //     const result = astronomyPrompts.starsInConstellations();
+  //     expect(result).to.deep.equal({});
+  //   });
+
+  //   it('starsByColor', () => {
+  //     const result = astronomyPrompts.starsByColor();
+  //     expect(result).to.deep.equal({});
+  //   });
+
+  //   it('constellationsStarsExistIn', () => {
+  //     const result = astronomyPrompts.constellationsStarsExistIn();
+  //     expect(result).to.deep.equal({});
+  //   });
+  // });
 
 });
