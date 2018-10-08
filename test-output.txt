@@ -1,0 +1,220 @@
+
+> jsFun@1.0.0 test /Users/chris/Turing/2 Mod.2/jsFun
+> ./node_modules/mocha/bin/mocha test/ --reporter dot --require mocha-clean
+
+
+
+  ․․!․!!․!․․․!!․!!!․․!․․
+
+  12 passing (23ms)
+  10 failing
+
+  1) PROTOTYPES
+       Turing Prompts
+         modulesPerTeacher:
+
+      AssertionError: expected { Object (Pam, Brittany, ...) } to deeply equal { Object (Pam, Brittany, ...) }
+      + expected - actual
+
+           3
+           4
+         ]
+         "Leta": [
+      +    4
+           2
+      -    4
+         ]
+         "Louisa": [
+           1
+           2
+      
+      at Context.it (test/prototype-test.js:35:30)
+
+  2) PROTOTYPES
+       Club Prompts
+         membersBelongingToClubs:
+     AssertionError: expected { Object (Louisa, Pam, ...) } to deeply equal undefined
+      at Context.it (test/prototype-test.js:48:30)
+
+  3) PROTOTYPES
+       Boss Prompts
+         bossLoyalty:
+
+      AssertionError: expected [ Array(3) ] to deeply equal [ Array(3) ]
+      + expected - actual
+
+       [
+         {
+      -    "bossName": "scar"
+      +    "bossName": "Scar"
+           "sidekickLoyalty": 16
+         }
+         {
+      -    "bossName": "ursula"
+      +    "bossName": "Ursula"
+           "sidekickLoyalty": 20
+         }
+         {
+      -    "bossName": "jafar"
+      +    "bossName": "Jafar"
+           "sidekickLoyalty": 3
+         }
+       ]
+      
+      at Context.it (test/prototype-test.js:56:30)
+
+  4) PROTOTYPES
+       Class Prompts
+         totalCapacities:
+
+      AssertionError: expected { beCapacity: 96, feCapacity: 110 } to deeply equal { FE: 110, BE: 96 }
+      + expected - actual
+
+       {
+      -  "beCapacity": 96
+      -  "feCapacity": 110
+      +  "BE": 96
+      +  "FE": 110
+       }
+      
+      at Context.it (test/prototype-test.js:69:30)
+
+  5) PROTOTYPES
+       Kitty Prompts
+         sortByAge:
+
+      AssertionError: expected [ Array(4) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      -    "age": 1
+      -    "color": "tuxedo"
+      -    "name": "Max"
+      +    "age": 8
+      +    "color": "orange"
+      +    "name": "Snickers"
+         }
+         {
+      +    "age": 5
+      +    "color": "orange"
+      +    "name": "Tiger"
+      +  }
+      +  {
+           "age": 2
+           "color": "grey"
+           "name": "Felicia"
+         }
+         {
+      -    "age": 5
+      -    "color": "orange"
+      -    "name": "Tiger"
+      +    "age": 1
+      +    "color": "tuxedo"
+      +    "name": "Max"
+         }
+      -  {
+      -    "age": 8
+      -    "color": "orange"
+      -    "name": "Snickers"
+      -  }
+       ]
+      
+      at Context.it (test/prototype-test.js:96:30)
+
+  6) PROTOTYPES
+       Kitty Prompts
+         growUp:
+
+      AssertionError: expected [ Array(2) ] to deeply equal [ Array(4) ]
+      + expected - actual
+
+       [
+         {
+      -    "age": 5
+      +    "age": 4
+      +    "color": "grey"
+      +    "name": "Felicia"
+      +  }
+      +  {
+      +    "age": 7
+           "color": "orange"
+           "name": "Tiger"
+         }
+         {
+      -    "age": 8
+      +    "age": 10
+           "color": "orange"
+           "name": "Snickers"
+         }
+      +  {
+      +    "age": 3
+      +    "color": "tuxedo"
+      +    "name": "Max"
+      +  }
+       ]
+      
+      at Context.it (test/prototype-test.js:101:30)
+
+  7) PROTOTYPES
+       Astronomy Prompts
+         starsInConstellations:
+     AssertionError: expected 'REPLACE WITH YOUR RESULT HERE' to deeply equal [ Array(2) ]
+      at Context.it (test/prototype-test.js:117:30)
+
+  8) PROTOTYPES
+       Astronomy Prompts
+         starsByColor:
+     AssertionError: expected 'REPLACE WITH YOUR RESULT HERE' to deeply equal { Object (blue, white, ...) }
+      at Context.it (test/prototype-test.js:122:30)
+
+  9) PROTOTYPES
+       Astronomy Prompts
+         constellationsStarsExistIn:
+     AssertionError: expected 'REPLACE WITH YOUR RESULT HERE' to deeply equal [ Array(11) ]
+      at Context.it (test/prototype-test.js:127:30)
+
+  10) PROTOTYPES
+       Cake Prompts
+         stockPerCake:
+
+      AssertionError: expected [ Array(6) ] to deeply equal [ Array(6) ]
+      + expected - actual
+
+       [
+         {
+      -    "cakeFlavor": "dark chocolate"
+      +    "flavor": "dark chocolate"
+           "inStock": 15
+         }
+         {
+      -    "cakeFlavor": "yellow"
+      +    "flavor": "yellow"
+           "inStock": 14
+         }
+         {
+      -    "cakeFlavor": "white chiffon"
+      +    "flavor": "white chiffon"
+           "inStock": 0
+         }
+         {
+      -    "cakeFlavor": "butter rum"
+      +    "flavor": "butter rum"
+           "inStock": 9
+         }
+         {
+      -    "cakeFlavor": "vanilla"
+      +    "flavor": "vanilla"
+           "inStock": 21
+         }
+         {
+      -    "cakeFlavor": "honey"
+      +    "flavor": "honey"
+           "inStock": 0
+         }
+       ]
+      
+      at Context.it (test/prototype-test.js:145:30)
+
+
+

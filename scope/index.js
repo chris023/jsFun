@@ -200,7 +200,6 @@ const scope = {
 
     function petDog() {
       // Log A: dog
-      console.log('a', dog);
 
       if (dog === 'Spot') {
         let dog = 'Fluffy';
@@ -208,25 +207,21 @@ const scope = {
 
       function rollOver() {
         // Log B: dog
-        console.log('b', dog);
 
         dog = 'Biscuit';
 
         // Log C: dog
-        console.log('c', dog);
 
       }
 
       rollOver();
 
       // Log D: dog
-      console.log('d', dog);
     }
 
     petDog();
 
     // Log E: dog
-    console.log('e', dog);
 
     const result = [
       { A: 'Spot' },

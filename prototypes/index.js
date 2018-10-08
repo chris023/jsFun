@@ -530,7 +530,17 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((star, retObj) => {
+      if (star.color in retObj) {
+        retObj[star.color].push(star);
+      }
+      else {
+        retObj[star.color] = [star];
+      }
+      return retObj;
+    }, {});
+
+    
     return result;
 
     // Annotation:
